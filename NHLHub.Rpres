@@ -4,25 +4,53 @@ author: Paul Y. Ke
 date: 2/20/2018
 autosize: true
 
-First Slide
+Project Overview
 ========================================================
 
-For more details on authoring R presentations please visit <https://support.rstudio.com/hc/en-us/articles/200486468>.
+This project has two parts and is intended to provide the experience of developing a Data Product.
 
-- Bullet 1
-- Bullet 2
-- Bullet 3
+First, a Shiny application was developed and deployed on Rstudio's servers. 
+The application can be found here:
+https://paulke1039.shinyapps.io/NHLHub/
 
-Slide With Code
+Second, I used Rstudio Presenter to prepare a reproducible pitch presentation, which you are now watching.
+The source for the application and this presentation can be found on GitHub here:
+https://github.com/paulke1039/NHLHub
+
+
+NHL Dataset
 ========================================================
-
-```{r}
-summary(cars)
-```
-
-Slide With Plot
-========================================================
+The dataset was built from data on Wikipedia:
+https://en.wikipedia.org/wiki/List_of_National_Hockey_League_arenas
 
 ```{r, echo=FALSE}
-plot(cars)
+arena <- c('Air Canada Cenre', 'Amalie Arena', 'American Airlines Center', 'BB&T Center', 'Barclays Center', 'Bell Center', 'Bell MTS Place', 'Bridgestone Arena', 'Canadian Tire Centre', 'Capital One Arena', 'Gila River Arena', 'Honda Center', 'KeyBank Center', 'Little Caesars Arena', 'Madison Square Garden', 'Nationwide Arena', 'Pepsi Center', 'PNC Arena', 'PPG Paints Arena', 'Prudential Center', 'Rogers Arena', 'Rogers Place', 'Scotiabank Saddledome', 'SAP Center', 'Scottrade Center', 'Staples Center', 'TD Garden', 'T-Mobile Arena', 'United Center', 'Wells Fargo Center', 'Xcel Energy Center')
+
+capacity <- c(18819, 19092, 18532, 19250, 15795, 21302, 15321, 17113, 17373, 18506, 17125, 17174, 19070, 19515, 18006, 18144, 17809, 18680, 18387, 16514, 18910, 18347, 19289, 17562, 18724, 18230, 17565, 17368, 19717, 19543, 17954)
+
+team <- c('Toronto Maple Leafs', 'Tampa Bay Lightning', 'Dallas Stars', 'Florida Panthers', 'New York Islanders', 'Montreal Canadiens', 'Winnipeg Jets', 'Nashville Predators', 'Ottawa Senators', 'Washington Capitals', 'Arizona Coyotes', 'Anaheim Ducks', 'Buffalo Sabres', 'Detroit Red Wings', 'New York Rangers', 'Columbus Blue Jackets', 'Colorado Avalanche', 'Carolina Hurricanes', 'Pittsburgh Penguins', 'New Jersey Devils', 'Vancouver Canucks', 'Edmonton Oilers', 'Calgary Flames', 'San Jose Sharks', 'St. Louis Blues', 'Los Angeles Kings', 'Boston Bruins', 'Vegas Golden Knights', 'Chicago Blackhawks', 'Philadelphia Flyers', 'Minnesota Wild')
+
+division <- c('atlantic', 'atlantic', 'central', 'atlantic', 'metro', 'atlantic', 'central', 'central', 'atlantic', 'metro', 'pacific', 'pacific' ,'atlantic', 'atlantic', 'metro', 'metro', 'central', 'metro', 'metro', 'metro', 'pacific', 'pacific', 'pacific', 'pacific', 'central', 'pacific','atlantic', 'pacific', 'central', 'metro', 'central')
+
+address <- c("40 Bay Street", "401 Channelside Drive", "2500 Victory Avenue", "1 Panther Parkway", "620 Atlantic Avenue", "1909, avenue des Canadiens-de-Montréal", "300 Portage Avenue", "501 Broadway", "1000 Palladium Drive", "601 F Street NW", "9400 West Maryland Avenue", "2695 East Katella Avenue", "1 Seymour H. Knox III Plaza", "2645 Woodward Avenue", "4 Pennsylvania Plaza", "200 West Nationwide Boulevard", "1000 Chopper Circle", "1400 Edwards Mill Road", "1001 Fifth Avenue", "25 Lafayette Street", "800 Griffiths Way", "104 Avenue NW", "555 Saddledome Rise SE", "525 West Santa Clara Street", "1401 Clark Avenue", "1111 South Figueroa Street", "	100 Legends Way", "3780 South Las Vegas Boulevard", "1901 West Madison Street", "3601 South Broad Street", "199 Kellogg Boulevard West")
+
+city <- c("Toronto", "Tampa", "Dallas", "Sunrise", "Brooklyn", "Montreal", "Winnipeg", "Nashville", "Ottawa", "Washington", "Glendale", "Anaheim", "Buffalo", "Detroit", "New York", "Columbus", "Denver", "Raleigh", "Pittsburgh", "Newark", "Vancouver", "Edmonton", "Calgary", "San Jose", "St. Louis", "Los Angeles", "Boston", "Paradise", "Chicago", "Philadelphia", "Saint Paul")
+
+state <- c("Ontario", "Florida", "Texas", "Florida", "New York", "Quebec", "Manitoba", "Tennessee", "Ontario", "D.C.", "Arizona", "California", "New York", "Michigan", "New York", "Ohio", "Colorado", "North Carolina", "Pennsylvania", "New Jersey", "British Columbia", "Alberta", "Alberta", "California", "Missouri", "California", "Massachusetts", "Nevada", "Illinois", "Pennsylvania", "Minnesota")
+nhl.data <- data.frame(division, team, arena, capacity, address, city, state)
 ```
+```{r, echo=TRUE}
+summary(nhl.data)
+```
+
+Application screenshot
+========================================================
+![NHLHub Screenshot](NHLHub.png)
+
+Behind the Scenes
+========================================================
+The user selects one or more divisions using the checkboxes on the left.
+
+A table is generated on the right by subsetting the data frame using the values selected by the user.
+
+The user can select how many rows appear on the page, sort each column of data, and search within the table.
